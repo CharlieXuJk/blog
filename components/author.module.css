@@ -1,13 +1,12 @@
-.author-div{
+.author_div{
     text-align: center;
     padding: 1rem;
 
 }
-.author-div div{
+.author_div div{
     margin-bottom: 1rem;
-
 }
-.author-introduction{
+.author_introduction{
     font-size:.8rem;
     color: #999;
 }
