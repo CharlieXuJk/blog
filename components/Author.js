@@ -1,5 +1,6 @@
-import {Avatar,Divider} from 'antd'
+import {Avatar,Divider, Popover} from 'antd'
 import styles from './author.module.css'
+import { GithubOutlined,LinkedinOutlined, GoogleOutlined, FacebookOutlined } from '@ant-design/icons';
 
 
 // <div className={styles.footerdiv}>
@@ -8,14 +9,22 @@ const Author =()=>{
 
     return (
         <div className={styles.author_div}>
-            <div> <Avatar size={100} src="http://blogimages.jspang.com/blogtouxiang1.jpg"  /></div>
+            <div>
+                <a href="posts/first-post"> <Avatar  size={100} src="/images/selfi.jpg"  /></a>
+            </div>
             <div className={styles.author_introduction}>
-                光头程序员，专注于WEB和移动前端开发。要录1000集免费前端视频的傻X。此地维权无门，此时无能为力，此心随波逐流。
-                <Divider>社交账号</Divider>
-                <Avatar size={28} icon="github" className={styles.account}  />
-                <Avatar size={28} icon="qq"  className={styles.account} />
-                <Avatar size={28} icon="wechat"  className={styles.account}  />
-
+                A passionate geek who loves latest technologies
+                <Divider>Social Medias</Divider>
+                <a href="https://github.com/CharlieXuJk">
+                    <Avatar size={28} icon={<GithubOutlined />} className={styles.account}  />
+                </a>
+                <a href="https://www.linkedin.com/in/chunhao-xu-957a91167/">
+                    <Avatar size={28} icon={<LinkedinOutlined />}  className={styles.account} />
+                </a>
+                <Popover title="hans040515@gmail.com">
+                    <Avatar size={28} icon={<GoogleOutlined />}  className={styles.account}  />
+                </Popover>
+                <Avatar size={28} icon={<FacebookOutlined />}  className={styles.account}  />
             </div>
         </div>
     )
