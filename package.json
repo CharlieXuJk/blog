@@ -17,9 +17,11 @@
     "axios": "^0.21.1",
     "babel-plugin-import": "^1.13.3",
     "classnames": "^2.2.6",
+    "gray-matter": "^4.0.3",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^6.7.0",
     "qs": "^6.10.1",
+    "react-markdown": "^7.0.1",
     "tailwindcss": "^2.2.8"
   }
 }

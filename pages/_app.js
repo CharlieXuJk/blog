@@ -1,9 +1,7 @@
 
 import 'antd/dist/antd.css'
-import '../styles/globals.css'
+//import '../styles/globals.module.css'
 import App from 'next/app'
-
-
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />

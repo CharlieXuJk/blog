@@ -1,3 +1,4 @@
+
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -6,8 +7,26 @@ import {Button} from 'antd'
 import React,{useState} from 'react'
 import {Row, Col, List, icon} from 'antd'
 import Header from '../components/Header'
+import Author from '../components/Author'
+import Advert from "../components/Advert"
+import Footer from "../components/Footer"
+import ReactMarkdown from 'react-markdown'
+import styles from "../components/detailed.module.css"
+import globalStyles from "../components/globals.module.css"
+import {getSortedPostsData} from "../libs/post11"
+import utilStyles from "../components/utils.module.css"
 
-export default function Home() {
+
+export async function getStaticProps() {
+    const allPostsData = getSortedPostsData()
+    return {
+        props: {
+            allPostsData
+        }
+    }
+}
+
+export default function Home({ allPostsData }) {
   return (
       <div>
           {/*// <div className={styles.container}>*/}
@@ -17,15 +36,32 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-          <Row className="comm-main" type="flex" justify="center">
-              <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}  >
-                  左侧
+          <Row className={globalStyles.comm_main} type="flex" justify="center">
+              <Col className={globalStyles.comm_left} xs={24} sm={24} md={16} lg={18} xl={14}  >
+                  <div className={styles.detailed_content} >
+                      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+                          <h2 className={utilStyles.headingLg}>Blog</h2>
+                          <ul className={utilStyles.list}>
+                              {allPostsData.map(({ id, date, title }) => (
+                                  <li className={utilStyles.listItem} key={id}>
+                                      {title}
+                                      <br />
+                                      {id}
+                                      <br />
+                                      {date}
+                                  </li>
+                              ))}
+                          </ul>
+                      </section>
+                  </div>
               </Col>
 
               <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
-                  右侧
+                  <Author/>
+                  {/*<Advert/>*/}
               </Col>
           </Row>
+          <Footer />
 
 
       {/*<main className={styles.main}>*/}
@@ -81,6 +117,25 @@ export default function Home() {
       {/*    </span>*/}
       {/*  </a>*/}
       {/*</footer>*/}
+
+          {/*<div>*/}
+          {/*    <List*/}
+          {/*        header={<div>最新日志</div>}*/}
+          {/*        itemLayout="vertical"*/}
+          {/*        dataSource={mylist}*/}
+          {/*        renderItem={item => (*/}
+          {/*            <List.Item>*/}
+          {/*                <div className="list-title">{item.title}</div>*/}
+          {/*                <div className="list-icon">*/}
+          {/*                    <span><Icon type="calendar" /> 2019-06-28</span>*/}
+          {/*                    <span><Icon type="folder" /> 视频教程</span>*/}
+          {/*                    <span><Icon type="fire" /> 5498人</span>*/}
+          {/*                </div>*/}
+          {/*                <div className="list-context">{item.context}</div>*/}
+          {/*            </List.Item>*/}
+          {/*        )}*/}
+          {/*    />*/}
+          {/*</div>*/}
      </div>
   )
 }
