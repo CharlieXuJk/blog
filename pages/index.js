@@ -15,6 +15,7 @@ import styles from "../components/detailed.module.css"
 import globalStyles from "../components/globals.module.css"
 import {getSortedPostsData} from "../libs/post11"
 import utilStyles from "../components/utils.module.css"
+import ChangeLog from "../components/mdty"
 
 
 export async function getStaticProps() {
@@ -58,6 +59,7 @@ export default function Home({ allPostsData }) {
 
               <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
                   <Author/>
+                  <ChangeLog/>
                   {/*<Advert/>*/}
               </Col>
           </Row>

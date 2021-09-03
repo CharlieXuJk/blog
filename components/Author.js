@@ -24,7 +24,9 @@ const Author =()=>{
                 <Popover title="hans040515@gmail.com">
                     <Avatar size={28} icon={<GoogleOutlined />}  className={styles.account}  />
                 </Popover>
-                <Avatar size={28} icon={<FacebookOutlined />}  className={styles.account}  />
+                <a href="https://www.facebook.com/chunhao.xu.39">
+                    <Avatar size={28} icon={<FacebookOutlined />}  className={styles.account}  />
+                </a>
             </div>
         </div>
     )
