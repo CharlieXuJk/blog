@@ -13,22 +13,31 @@ import Footer from "../components/Footer"
 import ReactMarkdown from 'react-markdown'
 import styles from "../components/detailed.module.css"
 import globalStyles from "../components/globals.module.css"
+import listStyles from "../components/list.module.css"
 import {getSortedPostsData} from "../libs/post11"
 import utilStyles from "../components/utils.module.css"
+import axios from "axios"
 import ChangeLog from "../components/mdty"
+import Icon from "@ant-design/icons";
 
 
-export async function getStaticProps() {
-    const allPostsData = getSortedPostsData()
-    return {
-        props: {
-            allPostsData
-        }
-    }
-}
+// export async function getStaticProps() {
+//     const allPostsData = getSortedPostsData()
+//     return {
+//         props: {
+//             allPostsData
+//         }
+//     }
+// }
 
-export default function Home({ allPostsData }) {
-  return (
+
+
+
+
+export default function Home(list) {
+
+    const [ mylist , setMylist ] = useState( list.data);
+    return (
       <div>
           {/*// <div className={styles.container}>*/}
       <Head>
@@ -39,22 +48,41 @@ export default function Home({ allPostsData }) {
       <Header />
           <Row className={globalStyles.comm_main} type="flex" justify="center">
               <Col className={globalStyles.comm_left} xs={24} sm={24} md={16} lg={18} xl={14}  >
-                  <div className={styles.detailed_content} >
-                      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-                          <h2 className={utilStyles.headingLg}>Blog</h2>
-                          <ul className={utilStyles.list}>
-                              {allPostsData.map(({ id, date, title }) => (
-                                  <li className={utilStyles.listItem} key={id}>
-                                      {title}
-                                      <br />
-                                      {id}
-                                      <br />
-                                      {date}
-                                  </li>
-                              ))}
-                          </ul>
-                      </section>
+                  <div>
+                      <List
+                          header={<div>最新日志</div>}
+                          itemLayout="vertical"
+                          dataSource={mylist}
+                          renderItem={item => (
+                              <List.Item>
+                                  <div className={listStyles.list_title}>{item.title}</div>
+                                  <div className={listStyles.list_icon}>
+                                      <span><Icon type="calendar" /> {item.addTime}</span>
+                                      <span><Icon type="folder" /> {item.typeName}</span>
+                                      <span><Icon type="fire" /> {item.view_count}人</span>
+                                  </div>
+                                  <div className="list-context">{item.introduce}</div>
+                              </List.Item>
+                          )}
+                      />
+
                   </div>
+                  {/*<div className={styles.detailed_content} >*/}
+                  {/*    <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>*/}
+                  {/*        <h2 className={utilStyles.headingLg}>Blog</h2>*/}
+                  {/*        <ul className={utilStyles.list}>*/}
+                  {/*            {allPostsData.map(({ id, date, title }) => (*/}
+                  {/*                <li className={utilStyles.listItem} key={id}>*/}
+                  {/*                    {title}*/}
+                  {/*                    <br />*/}
+                  {/*                    {id}*/}
+                  {/*                    <br />*/}
+                  {/*                    {date}*/}
+                  {/*                </li>*/}
+                  {/*            ))}*/}
+                  {/*        </ul>*/}
+                  {/*    </section>*/}
+                  {/*</div>*/}
               </Col>
 
               <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
@@ -66,78 +94,19 @@ export default function Home({ allPostsData }) {
           <Footer />
 
 
-      {/*<main className={styles.main}>*/}
-      {/*  <h1 className={styles.title}>*/}
-      {/*    Welcome to <a href="https://nextjs.org">Next.js!</a>*/}
-      {/*  </h1>*/}
-
-      {/*  <p className={styles.description}>*/}
-      {/*    Get started by editing{' '}*/}
-      {/*    <code className={styles.code}>pages/index.js</code>*/}
-      {/*  </p>*/}
-
-      {/*  <div className={styles.grid}>*/}
-      {/*    <a href="https://nextjs.org/docs" className={styles.card}>*/}
-      {/*      <h2>Documentation &rarr;</h2>*/}
-      {/*      <p>Find in-depth information about Next.js features and API.</p>*/}
-      {/*    </a>*/}
-
-      {/*    <a href="https://nextjs.org/learn" className={styles.card}>*/}
-      {/*      <h2>Learn &rarr;</h2>*/}
-      {/*      <p>Learn about Next.js in an interactive course with quizzes!</p>*/}
-      {/*    </a>*/}
-
-      {/*    <a*/}
-      {/*      href="https://github.com/vercel/next.js/tree/master/examples"*/}
-      {/*      className={styles.card}*/}
-      {/*    >*/}
-      {/*      <h2>Examples &rarr;</h2>*/}
-      {/*      <p>Discover and deploy boilerplate example Next.js projects.</p>*/}
-      {/*    </a>*/}
-
-      {/*    <a*/}
-      {/*      href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"*/}
-      {/*      className={styles.card}*/}
-      {/*    >*/}
-      {/*      <h2>Deploy &rarr;</h2>*/}
-      {/*      <p>*/}
-      {/*        Instantly deploy your Next.js site to a public URL with Vercel.*/}
-      {/*      </p>*/}
-      {/*    </a>*/}
-      {/*  </div>*/}
-      {/*</main>*/}
-
-      {/*<footer className={styles.footer}>*/}
-      {/*  <a*/}
-      {/*    href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"*/}
-      {/*    target="_blank"*/}
-      {/*    rel="noopener noreferrer"*/}
-      {/*  >*/}
-      {/*    Powered by{' '}*/}
-      {/*    <span className={styles.logo}>*/}
-      {/*      <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />*/}
-      {/*    </span>*/}
-      {/*  </a>*/}
-      {/*</footer>*/}
-
-          {/*<div>*/}
-          {/*    <List*/}
-          {/*        header={<div>最新日志</div>}*/}
-          {/*        itemLayout="vertical"*/}
-          {/*        dataSource={mylist}*/}
-          {/*        renderItem={item => (*/}
-          {/*            <List.Item>*/}
-          {/*                <div className="list-title">{item.title}</div>*/}
-          {/*                <div className="list-icon">*/}
-          {/*                    <span><Icon type="calendar" /> 2019-06-28</span>*/}
-          {/*                    <span><Icon type="folder" /> 视频教程</span>*/}
-          {/*                    <span><Icon type="fire" /> 5498人</span>*/}
-          {/*                </div>*/}
-          {/*                <div className="list-context">{item.context}</div>*/}
-          {/*            </List.Item>*/}
-          {/*        )}*/}
-          {/*    />*/}
-          {/*</div>*/}
      </div>
   )
 }
+
+Home.getInitialProps = async ()=> {
+    const promise = new Promise((resolve) => {
+        axios('http://127.0.0.1:7001/default/getArticleList').then(
+            (res) => {
+                //console.log('远程获取数据结果:',res.data.data)
+                resolve(res.data)
+            }
+        )
+    })
+    return await promise
+}
+
