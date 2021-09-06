@@ -8,15 +8,17 @@ import Author from '../components/Author'
 import Advert from '../components/Advert'
 import Footer from '../components/Footer'
 import styles from '../components/detailed.module.css'
-import globalStyles from '../styles/globals.module.css'
+import globalStyles from '../components/globals.module.css'
 import ReactDom from 'react-dom'
 import MDXDocument from '../posts/ssg-ssr.mdx'
+import axios from "axios";
 
 export default function Detailed() {
+const [mylist, setMylist] = useState(list.data)
 return (
     <>
         <Head>
-            <title>博客详细页</title>
+            <title>Detailed page</title>
         </Head>
         <Header />
         <Row className={globalStyles.comm_main} type="flex" justify="center">
@@ -24,19 +26,19 @@ return (
                 <div>
                     <div className={styles.bread_div}>
                         <Breadcrumb>
-                            <Breadcrumb.Item><a href="/">首页</a></Breadcrumb.Item>
+                            <Breadcrumb.Item><a href="/">Home</a></Breadcrumb.Item>
                             <Breadcrumb.Item>视频列表</Breadcrumb.Item>
                             <Breadcrumb.Item>xxxx</Breadcrumb.Item>
                         </Breadcrumb>
                     </div>
                     <div>
                         <div className={styles.detailed_title}>
-                            React实战视频教程-技术胖Blog开发(更新08集)
+                            {item.title}
                         </div>
                         <div className={[styles.list_icon, styles.center].join(' ')}>
-                            <span><Icon type="calendar" /> 2019-06-28</span>
-                            <span><Icon type="folder" /> 视频教程</span>
-                            <span><Icon type="fire" /> 5498人</span>
+                            <span><Icon type="calendar" /> {item.addTime}</span>
+                            <span><Icon type="folder" /> {item.typeName}</span>
+                            <span><Icon type="fire" /> {item.view_count}</span>
                         </div>
                         <div className={styles.detailed_content}>
                             <MDXDocument />
@@ -51,4 +53,21 @@ return (
         </Row>
         <Footer/>
     </>)
+}
+
+Detailed.getInitialProps = async(context)=>{
+
+    console.log(context.query.id)
+    let id =context.query.id
+    const promise = new Promise((resolve)=>{
+
+        axios('http://127.0.0.1:7001/default/getArticleById/'+id).then(
+            (res)=>{
+                //console.log(title)
+                resolve(res.data.data[0])
+            }
+        )
+    })
+
+    return await promise
 }

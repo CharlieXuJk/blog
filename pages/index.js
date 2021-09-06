@@ -50,16 +50,20 @@ export default function Home(list) {
               <Col className={globalStyles.comm_left} xs={24} sm={24} md={16} lg={18} xl={14}  >
                   <div>
                       <List
-                          header={<div>最新日志</div>}
+                          header={<div>Lateset Posts</div>}
                           itemLayout="vertical"
                           dataSource={mylist}
                           renderItem={item => (
                               <List.Item>
-                                  <div className={listStyles.list_title}>{item.title}</div>
+                                  <div className={listStyles.list_title}>
+                                      <Link href={{pathname:'/detailed',query:{id:item.id}}}>
+                                        <a>{item.title}</a>
+                                      </Link>
+                                  </div>
                                   <div className={listStyles.list_icon}>
                                       <span><Icon type="calendar" /> {item.addTime}</span>
                                       <span><Icon type="folder" /> {item.typeName}</span>
-                                      <span><Icon type="fire" /> {item.view_count}人</span>
+                                      <span><Icon type="fire" /> {item.view_count} Visits</span>
                                   </div>
                                   <div className="list-context">{item.introduce}</div>
                               </List.Item>
