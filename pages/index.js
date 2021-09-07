@@ -10,14 +10,12 @@ import Header from '../components/Header'
 import Author from '../components/Author'
 import Advert from "../components/Advert"
 import Footer from "../components/Footer"
-import ReactMarkdown from 'react-markdown'
 import styles from "../components/detailed.module.css"
 import globalStyles from "../components/globals.module.css"
 import listStyles from "../components/list.module.css"
 import {getSortedPostsData} from "../libs/post11"
 import utilStyles from "../components/utils.module.css"
 import axios from "axios"
-import ChangeLog from "../components/mdty"
 import Icon from "@ant-design/icons";
 
 
@@ -91,7 +89,6 @@ export default function Home(list) {
 
               <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
                   <Author/>
-                  <ChangeLog/>
                   {/*<Advert/>*/}
               </Col>
           </Row>

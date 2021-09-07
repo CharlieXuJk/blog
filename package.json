@@ -22,7 +22,7 @@
     "classnames": "^2.2.6",
     "egg-cors": "^2.2.3",
     "gray-matter": "^4.0.3",
-    "highlight": "^0.2.4",
+    "highlight.js": "^11.2.0",
     "marked": "^3.0.2",
     "next": "^11.1.2",
     "postcss-flexbugs-fixes": "^5.0.2",
@@ -30,7 +30,6 @@
     "qs": "^6.10.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-markdown": "^7.0.1",
     "tailwindcss": "^2.2.8"
   }
 }

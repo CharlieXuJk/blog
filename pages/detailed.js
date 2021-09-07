@@ -1,7 +1,6 @@
 import React,{useState} from 'react'
 import Head from 'next/head'
 import {Row, Col , Icon ,Breadcrumb  } from 'antd'
-import ReactMarkdown from 'react-markdown'
 
 import Header from '../components/Header'
 import Author from '../components/Author'
@@ -13,9 +12,32 @@ import ReactDom from 'react-dom'
 import MDXDocument from '../posts/ssg-ssr.mdx'
 import axios from "axios";
 
-export default function Detailed() {
-const [mylist, setMylist] = useState(list.data)
-return (
+import marked from 'marked'
+import hljs from "highlight.js"
+import 'highlight.js/styles/monokai-sublime.css'
+
+export default function Detailed(props) {
+    const renderer = new marked.Renderer()
+
+    marked.setOptions({
+        renderer: renderer,
+
+        gfm: true,       //github style markdown
+        pedantic: false, //false: do some refractor for the written markdown
+        sanitize: false, //picture or videos
+        tables: true,
+        breaks: false,
+        smartLists: true,
+        smartypants: false,
+
+        highlight: function (code) {
+            return hljs.highlightAuto(code).value;
+        }
+
+    });
+
+    let html = marked(props.article_content)
+    return (
     <>
         <Head>
             <title>Detailed page</title>
@@ -33,15 +55,16 @@ return (
                     </div>
                     <div>
                         <div className={styles.detailed_title}>
-                            {item.title}
+                            {props.title}
                         </div>
                         <div className={[styles.list_icon, styles.center].join(' ')}>
-                            <span><Icon type="calendar" /> {item.addTime}</span>
-                            <span><Icon type="folder" /> {item.typeName}</span>
-                            <span><Icon type="fire" /> {item.view_count}</span>
+                            <span><Icon type="calendar" /> {props.addTime}</span>
+                            <span><Icon type="folder" /> {props.typeName}</span>
+                            <span><Icon type="fire" /> {props.view_count}</span>
                         </div>
-                        <div className={styles.detailed_content}>
-                            <MDXDocument />
+                        <div className={styles.detailed_content}
+                        dangerouslySetInnerHTML={{__html:html}}
+                        >
                         </div>
                     </div>
                 </div>
