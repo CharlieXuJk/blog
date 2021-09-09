@@ -1,5 +1,5 @@
 body{
-  background-color: #cbcbcb;
+  background-color: #e8e8e8;
 }
 
 pre{
@@ -31,4 +31,8 @@ code {
     color:#4f4f4f;
     margin: 0px 3px;
 
+}
+
+iframe{
+    height: 34rem;
 }

@@ -16,7 +16,9 @@ import listStyles from "../components/list.module.css"
 import {getSortedPostsData} from "../libs/post11"
 import utilStyles from "../components/utils.module.css"
 import axios from "axios"
-import Icon from "@ant-design/icons";
+import Icon, {CalendarOutlined, GithubOutlined} from "@ant-design/icons";
+import {HomeOutlined} from '@ant-design/icons';
+import  servicePath  from '../config/apiUrl'
 
 
 // export async function getStaticProps() {
@@ -27,9 +29,6 @@ import Icon from "@ant-design/icons";
 //         }
 //     }
 // }
-
-
-
 
 
 export default function Home(list) {
@@ -59,7 +58,7 @@ export default function Home(list) {
                                       </Link>
                                   </div>
                                   <div className={listStyles.list_icon}>
-                                      <span><Icon type="calendar" /> {item.addTime}</span>
+                                      <span><CalendarOutlined />{item.addTime}</span>
                                       <span><Icon type="folder" /> {item.typeName}</span>
                                       <span><Icon type="fire" /> {item.view_count} Visits</span>
                                   </div>
@@ -101,7 +100,7 @@ export default function Home(list) {
 
 Home.getInitialProps = async ()=> {
     const promise = new Promise((resolve) => {
-        axios('http://127.0.0.1:7001/default/getArticleList').then(
+        axios(servicePath.getArticleList).then(
             (res) => {
                 //console.log('远程获取数据结果:',res.data.data)
                 resolve(res.data)

@@ -15,6 +15,7 @@ import axios from "axios";
 import marked from 'marked'
 import hljs from "highlight.js"
 import 'highlight.js/styles/monokai-sublime.css'
+import servicePath from "../config/apiUrl";
 
 export default function Detailed(props) {
     const renderer = new marked.Renderer()
@@ -49,8 +50,8 @@ export default function Detailed(props) {
                     <div className={styles.bread_div}>
                         <Breadcrumb>
                             <Breadcrumb.Item><a href="/">Home</a></Breadcrumb.Item>
-                            <Breadcrumb.Item>视频列表</Breadcrumb.Item>
-                            <Breadcrumb.Item>xxxx</Breadcrumb.Item>
+                            <Breadcrumb.Item>{props.typeName}</Breadcrumb.Item>
+                            <Breadcrumb.Item>{props.title}</Breadcrumb.Item>
                         </Breadcrumb>
                     </div>
                     <div>
@@ -70,9 +71,9 @@ export default function Detailed(props) {
                 </div>
             </Col>
 
-            <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
-                <Author />
-            </Col>
+            {/*<Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>*/}
+            {/*    <Author />*/}
+            {/*</Col>*/}
         </Row>
         <Footer/>
     </>)
@@ -84,7 +85,7 @@ Detailed.getInitialProps = async(context)=>{
     let id =context.query.id
     const promise = new Promise((resolve)=>{
 
-        axios('http://127.0.0.1:7001/default/getArticleById/'+id).then(
+        axios(servicePath.getArticleById+id).then(
             (res)=>{
                 //console.log(title)
                 resolve(res.data.data[0])
